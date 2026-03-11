@@ -6,6 +6,11 @@
 
 using namespace std;
 
+
+
+//create ability for user to quit and have their inventory and balance saved
+//
+//
 void buy(Knife knives[], UserData& ud, int& size, char userType[], char userSkin[], AllKnife& allKnives){
   buyInfo();
   int typeIndex = 0;
@@ -45,7 +50,7 @@ void sell(Knife knives[], UserData& ud, int& size, char userType[], char userSki
   int index = 0;
   int target = 0;
   validKnife(allKnives, userType, userSkin, typeIndex, skinIndex, index);
-  insertStore(knives, size, allKnives, index, ud);
+  insertStore(knives, size, allKnives, index);
   ud.balance = allKnives.knives[index].price;
   bool inInventory = checkInventory(ud, allKnives, index, target);
   if(inInventory){
@@ -106,7 +111,7 @@ void trade(Knife knives[], UserData& ud, int& size, char userType[], char userSk
         ud.userInventory[ud.knifeCount] = knives[i];
         cout << ud.userInventory[ud.knifeCount].type << " " << ud.userInventory[ud.knifeCount].skin << " in your inventory" << endl;  
         ud.knifeCount++;
-        insertStore(knives, size, allKnives, index, ud);
+        insertStore(knives, size, allKnives, index);
         removeStore(knives, size, targetIndex);
       }
       i = size;
@@ -117,7 +122,7 @@ void trade(Knife knives[], UserData& ud, int& size, char userType[], char userSk
   }
 }
 
-void insertStore(Knife knives[], int& size, AllKnife& allKnives, int index, UserData& ud){
+void insertStore(Knife knives[], int& size, AllKnife& allKnives, int index){
   if(size+1 < DATACAP){
     strcpy(knives[size].type, allKnives.knives[index].type); //NEED TO FIX THIS
     strcpy(knives[size].skin, allKnives.knives[index].skin);
@@ -208,7 +213,7 @@ void readMenu(char& userChar, Knife knives[], int& size, bool& quit, UserData& u
   if(userChar == 'q' || userChar == 'Q'){ //QUIT
     goodbye();
     quit = true; // i know i know
-    exit(1); //cheeky sorry :P
+    exit(1); // :p
   }
   if (userChar == 't' || userChar == 'T'){ //TRADE
     printArray(knives, size);
@@ -243,7 +248,6 @@ bool charValid(char userChar){ //NEED TO ADD ONE TO CHECK BALANCE and INVENTORY 
 }
 
 void populateStoreArray(ifstream& ifile, Knife knives[], int& size){
-  bool endFound = false;
   ifile.ignore(1024, '\n');
   while(!ifile.eof() && size < 32){
 

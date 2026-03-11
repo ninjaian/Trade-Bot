@@ -60,10 +60,10 @@ bool readSkin(AllKnife&, char[], int&, int); //read skin type from user and veri
 void validKnife(AllKnife&, char[], char[], int&, int&, int&);
 
 // INSERT AND REMOVE FROM STOREFRONT AND USER INVENTORY
-void insertStore(Knife[], int&, AllKnife&, int, UserData&);
-void removeStore(Knife[], int&, int);
-void insertInventory(UserData&);
-void removeInventory(UserData&);
-bool checkInventory(UserData&, AllKnife&, int, int&);
+void insertStore(Knife[], int&, AllKnife&, int); //inserts an element into the end of the storefront array
+void removeStore(Knife[], int&, int); //removes an element from the storefront array
+void insertInventory(UserData&); //inserts a knife into the end of a users inevntory
+void removeInventory(UserData&); //removes a knife from the users inventory
+bool checkInventory(UserData&, AllKnife&, int, int&); //checks if a knife is in users inventory (relevent to selling/trading)
 
 #endif
